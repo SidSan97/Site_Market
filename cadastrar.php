@@ -51,18 +51,17 @@ $sql = "INSERT INTO usuario (usuario, sobrenome, senha, email, telefone, genero,
                     '" . $comp . "', 
                     NOW())";
 
-if($conexao->query($sql) === TRUE)
-{
-    $_SESSION['status_cadastro'] = true;
-    echo "Cadastro feito com sucesso!";
+
+
+
+if(false === $conexao->query($sql)) {
+    $conexao->close();
+    echo "Ops! Houston, we have a problem:<br>";
+    die($conexao->error);
 } 
 
-else
-echo "Cadastro nao realizado";
-echo $sql;
-
 $conexao->close();
+$_SESSION['status_cadastro'] = true;
+echo "Cadastro feito com sucesso!";
 
-//header('Location: login.php');
-exit;
 ?>
